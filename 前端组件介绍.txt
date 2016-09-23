@@ -1,0 +1,46 @@
+我加了3个内容：
+1、ajax请求时候的loading效果
+2、弹出提示层
+3、弹窗
+
+1、异步请求loading效果
+util中的loadObj方法
+调用方式：
+var loginLoading = util.loadObj($('#loading'));//初始化
+loginLoading.loading();//异步加载开始，显示loading
+loginLoading.loaded();//异步加载成功，隐藏loading
+loginLoading.error(data.message);//异步加载失败，显示失败信息
+
+2、弹出层提示
+util中的popTips方法
+调用方式：
+util.popTips({text:"提示信息"，state:"ok"})//成功弹出层提示信息
+util.popTips({text:"提示信息"，state:"no"})//失败弹出层提示信息
+util.popTips({text:"提示信息"，state:"alert"})//提醒弹出层提示信息
+
+3、弹窗
+util中的popup方法
+调用方式
+1、jsp中需要添加弹窗内容的html代码，并且设置style="display:none"使其隐藏
+2、js调用
+util.popup({
+    id:'logoutPop',//html中定义的弹窗内容div id
+    width:'420px',//弹窗宽度
+    til:'提示',//弹窗标题
+    confirmCallback: function() {//确认按钮点击之后的回调
+        window.location = '/front/user/loginOut';
+    }
+});
+3、所有参数介绍
+init = {
+    til: '',//弹窗标题
+    id: '',//弹窗id
+    width: "550px",//弹窗宽度
+    height: "500px",//弹窗高度
+    showNav: true,//弹窗是否需要标题,true==需要，false==不需要
+    beforeShow: null,//弹窗弹出前调用
+    closeCallback: null,//关闭弹窗之后的回调函数
+    confirmCallback: null,//确认之后的回调函数
+    cancleCallback: null,//取消之后的回调函数
+    setClass:'g-tanchu-box'//自定义弹窗样式，默认为g-tanchu-box，在popup/popup.css中定义了默认样式
+};
